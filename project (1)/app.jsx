@@ -1,9 +1,17 @@
-const Application = function(props) {
+const Header = props =>
+  (
+    <div className="header">
+      <h1>{props.title}</h1>
+    </div>
+  )
+
+Header.propTypes = {
+  title: React.PropTypes.string.isRequired
+};
+const Application = function (props) {
   return (
     <div className="scoreboard">
-      <div className="header">
-        <h1>{props.title}</h1>
-      </div>
+      <Header title={props.title} />
       <div>
         <div className="player">
           <div className="player-name">
@@ -41,4 +49,4 @@ Application.defaultProps = {
   title: "Scoreboard",
 }
 
-ReactDOM.render(<Application title="CHUPS"/>, document.getElementById('container'));
+ReactDOM.render(<Application />, document.getElementById('container'));

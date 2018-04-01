@@ -1,3 +1,18 @@
+let PLAYERS = [
+  {
+    name: "Joe Chesney",
+    score: 35
+  },
+  {
+    name: "Old Faceney",
+    score: 38
+  },
+  {
+    name: "Regular Dudesney",
+    score: 15
+  }
+]
+
 const Header = props =>
   (
     <div className="header">
@@ -48,9 +63,13 @@ const Application = function (props) {
 
 Application.propTypes = {
   title: React.PropTypes.string,
+  players: React.PropTypes.arrayOf(React.PropTypes.shape({
+    name: React.PropTypes.string.isRequired,
+    score: React.PropTypes.number.isRequired
+  })).isRequired
 };
 Application.defaultProps = {
   title: "Scoreboard",
 }
 
-ReactDOM.render(<Application />, document.getElementById('container'));
+ReactDOM.render(<Application players={PLAYERS}/>, document.getElementById('container'));

@@ -4,39 +4,36 @@ const Header = props =>
       <h1>{props.title}</h1>
     </div>
   )
+  Header.propTypes = {
+    title: React.PropTypes.string.isRequired
+  };
 
-Header.propTypes = {
-  title: React.PropTypes.string.isRequired
-};
+const Player = props =>
+  <div className="player">
+    <div className="player-name">
+      {props.name}
+    </div>
+    <div className="player-score">
+      <div className="counter">
+        <button className="counter-action decrement">-</button>
+        <div className="counter-score">{props.score}</div>
+        <button className="counter-action increment">+</button>
+      </div>
+    </div>
+  </div>
+
+  Player.propTypes = {
+    name: React.PropTypes.string.isRequired,
+    score: React.PropTypes.number.isRequired
+  };
+
 const Application = function (props) {
   return (
     <div className="scoreboard">
       <Header title={props.title} />
       <div>
-        <div className="player">
-          <div className="player-name">
-            Joe Chesney
-          </div>
-          <div className="player-score">
-            <div className="counter">
-              <button className="counter-action decrement">-</button>
-              <div className="counter-score">34</div>
-              <button className="counter-action increment">+</button>
-            </div>
-          </div>
-        </div>
-        <div className="player">
-          <div className="player-name">
-            Stweh Skrizney
-          </div>
-          <div className="player-score">
-            <div className="counter">
-              <button className="counter-action decrement">-</button>
-              <div className="counter-score">40</div>
-              <button className="counter-action increment">+</button>
-            </div>
-          </div>
-        </div>
+        <Player name="Joe Chesney" score={31}/>
+        <Player name="Skriz Chizney" score={50}/>
       </div>
     </div>
   );

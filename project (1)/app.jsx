@@ -53,8 +53,11 @@ const Application = function (props) {
   return (
     <div className="scoreboard">
       <Header title={props.title} />
-      <div>
-        <Player name="Joe Chesney" score={31}/>
+      <div className="players">
+        {props.players.map(player=>
+          <Player name={player.name} score={player.score}/>  
+        )}
+        <Player name="Joe Dih Chesney" score={31}/>
         <Player name="Skriz Chizney" score={50}/>
       </div>
     </div>

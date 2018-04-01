@@ -1,8 +1,8 @@
-const Application = function() {
+const Application = function(props) {
   return (
-    <div className="application">
+    <div className="scoreboard">
       <div className="header">
-        <h1>Scoreboard</h1>
+        <h1>{props.title}</h1>
       </div>
       <div>
         <div className="player">
@@ -17,10 +17,28 @@ const Application = function() {
             </div>
           </div>
         </div>
-
+        <div className="player">
+          <div className="player-name">
+            Stweh Skrizney
+          </div>
+          <div className="player-score">
+            <div className="counter">
+              <button className="counter-action decrement">-</button>
+              <div className="counter-score">40</div>
+              <button className="counter-action increment">+</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-ReactDOM.render(<Application/>, document.getElementById('container'));
+Application.propTypes = {
+  title: React.PropTypes.string,
+};
+Application.defaultProps = {
+  title: "Scoreboard",
+}
+
+ReactDOM.render(<Application title="CHUPS"/>, document.getElementById('container'));

@@ -14,16 +14,23 @@ const Player = props =>
       {props.name}
     </div>
     <div className="player-score">
-      <div className="counter">
-        <button className="counter-action decrement">-</button>
-        <div className="counter-score">{props.score}</div>
-        <button className="counter-action increment">+</button>
-      </div>
+      <Counter score={props.score}/>
     </div>
   </div>
 
   Player.propTypes = {
     name: React.PropTypes.string.isRequired,
+    score: React.PropTypes.number.isRequired
+  };
+
+const Counter = props =>
+  <div className="counter">
+    <button className="counter-action decrement">-</button>
+    <div className="counter-score">{props.score}</div>
+    <button className="counter-action increment">+</button>
+  </div>
+
+  Counter.propTypes = {
     score: React.PropTypes.number.isRequired
   };
 

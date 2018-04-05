@@ -16,52 +16,59 @@ let PLAYERS = [
   }
 ]
 
-const Header = props =>
-  (
+const Header = props => {
+  return (
     <div className="header">
       <h1>{props.title}</h1>
     </div>
-  )
-  Header.propTypes = {
-    title: React.PropTypes.string.isRequired
-  };
+  );
+};
+Header.propTypes = {
+  title: React.PropTypes.string.isRequired
+};
 
-const Player = props =>
-  <div className="player">
-    <div className="player-name">
-      {props.name}
+const Player = props => {
+  return (
+    <div className="player">
+      <div className="player-name">
+        {props.name}
+      </div>
+      <div className="player-score">
+        <Counter score={props.score} />
+      </div>
     </div>
-    <div className="player-score">
-      <Counter score={props.score}/>
+  );
+};
+
+Player.propTypes = {
+  name: React.PropTypes.string.isRequired,
+  score: React.PropTypes.number.isRequired
+};
+
+const Counter = props => {
+  return (
+    <div className="counter">
+      <button className="counter-action decrement">-</button>
+      <div className="counter-score">{props.score}</div>
+      <button className="counter-action increment">+</button>
     </div>
-  </div>
+  );
+};
 
-  Player.propTypes = {
-    name: React.PropTypes.string.isRequired,
-    score: React.PropTypes.number.isRequired
-  };
-
-const Counter = props =>
-  <div className="counter">
-    <button className="counter-action decrement">-</button>
-    <div className="counter-score">{props.score}</div>
-    <button className="counter-action increment">+</button>
-  </div>
-
-  Counter.propTypes = {
-    score: React.PropTypes.number.isRequired
-  };
+Counter.propTypes = {
+  score: React.PropTypes.number.isRequired
+};
 
 const Application = function (props) {
   return (
     <div className="scoreboard">
       <Header title={props.title} />
       <div className="players">
-        {props.players.map(player=>
-          <Player name={player.name} score={player.score} key={player.id}/>  
-        )}
-        <Player name="Joe Dih Chesney" score={31}/>
-        <Player name="Skriz Chizney" score={50}/>
+        {props.players.map(player => {
+          return <Player name={player.name} score={player.score} key={player.id} />
+        })}
+        <Player name="Joe Dih Chesney" score={31} />
+        <Player name="Skriz Chizney" score={50} />
       </div>
     </div>
   );
@@ -73,10 +80,10 @@ Application.propTypes = {
     id: React.PropTypes.number.isRequired,
     name: React.PropTypes.string.isRequired,
     score: React.PropTypes.number.isRequired
-  })).isRequired
+  })).isRequired,
 };
 Application.defaultProps = {
   title: "Scoreboard",
 }
 
-ReactDOM.render(<Application players={PLAYERS}/>, document.getElementById('container'));
+ReactDOM.render(<Application players={PLAYERS} />, document.getElementById('container'));

@@ -51,15 +51,23 @@ const Counter = React.createClass({
     });
   },
   render: function () {
-    return (
-      <div className="counter">
-        <button className="counter-action decrement" onClick={this.decrementScore}>-</button>
-        <div className="counter-score">{this.state.score}</div>
-        <button className="counter-action increment" onClick={this.incrementScore}>+</button>
-      </div>
-    );
+    
   }
 });
+
+const counter = (props) => {
+  return (
+    <div className="counter">
+      <button className="counter-action decrement" >-</button>
+      <div className="counter-score">{props.score}</div>
+      <button className="counter-action increment" >+</button>
+    </div>
+  );
+}
+
+counter.PropTypes = {
+  score: React.PropTypes.number.isRequired,
+}
 
 const Player = props => {
   return (

@@ -48,7 +48,7 @@ const Player = props => {
         {props.name}
       </div>
       <div className="player-score">
-        <Counter score={props.score}/>
+        <Counter score={props.score} />
       </div>
     </div>
   );
@@ -60,7 +60,7 @@ Player.propTypes = {
 };
 
 const Application = React.createClass({
-  propTypes : {
+  propTypes: {
     title: React.PropTypes.string,
     initialPlayers: React.PropTypes.arrayOf(React.PropTypes.shape({
       id: React.PropTypes.number.isRequired,
@@ -69,24 +69,24 @@ const Application = React.createClass({
     })).isRequired,
   },
 
-  getDefulatProps: function(){
+  getDefulatProps: function () {
     return {
       title: "Scoreboard",
     }
   },
-  
-  getInitialState: function(){
+
+  getInitialState: function () {
     return {
       players: this.props.initialPlayers,
     }
   },
 
-  render: function(){
+  render: function () {
     return (
       <div className="scoreboard">
         <Header title={this.props.title} />
         <div className="players">
-          {this.props.initialPlayers.map(player => {
+          {this.state.players.map(player => {
             return <Player name={player.name} score={player.score} key={player.id} />
           })}
           <Player name="Joe Dih Chesney" score={31} />

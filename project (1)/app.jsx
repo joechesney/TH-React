@@ -59,31 +59,37 @@ Player.propTypes = {
   score: React.PropTypes.number.isRequired
 };
 
-const Application = function (props) {
-  return (
-    <div className="scoreboard">
-      <Header title={props.title} />
-      <div className="players">
-        {props.players.map(player => {
-          return <Player name={player.name} score={player.score} key={player.id} />
-        })}
-        <Player name="Joe Dih Chesney" score={31} />
-        <Player name="Skriz Chizney" score={50} />
-      </div>
-    </div>
-  );
-};
+const Application = React.createClass({
+  propTypes : {
+    title: React.PropTypes.string,
+    players: React.PropTypes.arrayOf(React.PropTypes.shape({
+      id: React.PropTypes.number.isRequired,
+      name: React.PropTypes.string.isRequired,
+      score: React.PropTypes.number.isRequired
+    })).isRequired,
+  },
 
-Application.propTypes = {
-  title: React.PropTypes.string,
-  players: React.PropTypes.arrayOf(React.PropTypes.shape({
-    id: React.PropTypes.number.isRequired,
-    name: React.PropTypes.string.isRequired,
-    score: React.PropTypes.number.isRequired
-  })).isRequired,
-};
-Application.defaultProps = {
-  title: "Scoreboard",
-}
+  getDefulatProps: function(){
+    return {
+      title: "Scoreboard",
+    }
+  },
+  
+  render: function(){
+    return (
+      <div className="scoreboard">
+        <Header title={this.props.title} />
+        <div className="players">
+          {this.props.players.map(player => {
+            return <Player name={player.name} score={player.score} key={player.id} />
+          })}
+          <Player name="Joe Dih Chesney" score={31} />
+          <Player name="Skriz Chizney" score={50} />
+        </div>
+      </div>
+    );
+  }
+})
+
 
 ReactDOM.render(<Application players={PLAYERS} />, document.getElementById('container'));

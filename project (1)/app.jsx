@@ -30,15 +30,16 @@ Header.propTypes = {
 const Counter = (props) => {
   return (
     <div className="counter">
-      <button className="counter-action decrement" >-</button>
+      <button className="counter-action decrement" onClick={function() {props.onChange(-1);}}>-</button>
       <div className="counter-score">{props.score}</div>
-      <button className="counter-action increment" >+</button>
+      <button className="counter-action increment" onClick={function() {props.onChange(1);}}>+</button>
     </div>
   );
 }
 
 Counter.PropTypes = {
   score: React.PropTypes.number.isRequired,
+  onChange: React.PropTypes.func.isRequired,
 }
 
 const Player = props => {
@@ -69,7 +70,7 @@ const Application = React.createClass({
     })).isRequired,
   },
 
-  getDefulatProps: function () {
+  getDefaultProps: function () {
     return {
       title: "Scoreboard",
     }

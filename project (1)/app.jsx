@@ -84,7 +84,8 @@ const Application = React.createClass({
   },
 
   onScoreChange: function(index, delta){
-    console.log('onScoreChange', index, delta);
+    this.state.players[index].score+= delta;
+    this.setState(this.state);
   },
 
   render: function () {
@@ -92,7 +93,7 @@ const Application = React.createClass({
       <div className="scoreboard">
         <Header title={this.props.title} />
         <div className="players">
-          {this.state.players.map(player, index => {
+          {this.state.players.map((player, index) => {
             return (
               <Player 
                 onScoreChange={function(delta){this.onScoreChange(index,delta)}.bind(this)} 

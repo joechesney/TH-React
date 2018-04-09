@@ -28,6 +28,16 @@ const StopWatch = React.createClass({
       running: false,
     }
   },
+
+  componentDidMount: function(){
+    this.interval = setInterval(this.onTick, 100);
+  },
+  componentWilUnmount: function(){
+    clearInterval(this.interval);
+  },
+  onTick: function(){
+    console.log('onTick', 100);
+  },
   onStart: function(){
     this.setState({running:true});
   },

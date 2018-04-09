@@ -39,7 +39,8 @@ const AddPlayerForm = React.createClass({
 
   onSubmit: function(e){
     e.preventDefault();
-    // this.props.onAdd();
+    this.props.onAdd(this.state.name);
+    this.setState({name: ""});
   },
 
   render: function(){
@@ -154,6 +155,11 @@ const Application = React.createClass({
     this.setState(this.state);
   },
 
+onPlayerAdd: function(name){
+  console.log("player added", name);
+  
+},
+
   render: function () {
     return (
       <div className="scoreboard">
@@ -169,7 +175,7 @@ const Application = React.createClass({
             );
           }.bind(this))}
         </div>
-        <AddPlayerForm />
+        <AddPlayerForm onAdd={this.onPlayerAdd}/>
       </div>
     );
   }

@@ -21,6 +21,17 @@ let PLAYERS = [
   }
 ]
 let nextId=5;
+
+const StopWatch = React.createClass({
+  render: function(){
+    return(
+      <div className="stopwatch">
+        <h2>Stopwatch</h2>
+        <div className="stopwatch-time">0</div>
+      </div>
+    )
+  }
+})
 const AddPlayerForm = React.createClass({
   propTypes:{
     onAdd: React.PropTypes.func.isRequired

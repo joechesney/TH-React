@@ -26,6 +26,8 @@ const StopWatch = React.createClass({
   getInitialState: function(){
     return {
       running: false,
+      elapsedTime: 0,
+      previousTime: 0,
     }
   },
 
@@ -36,10 +38,20 @@ const StopWatch = React.createClass({
     clearInterval(this.interval);
   },
   onTick: function(){
+    if(this.state.running){
+      let now = Date.now();
+      this.setState({
+        previousTime: now,
+        elapsedTime: this.state.elapsedTime + (now - this.state.previousTime),
+      });
+    }
     console.log('onTick', 100);
   },
   onStart: function(){
-    this.setState({running:true});
+    this.setState({
+      running:true,
+      previousTime: Date.now(),
+    });
   },
   onStop: function(){
     this.setState({running:false});

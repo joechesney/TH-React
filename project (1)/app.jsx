@@ -21,6 +21,19 @@ let PLAYERS = [
   }
 ]
 
+const AddPlayerForm = React.createClass({
+  render: function(){
+    return (
+      <div className="add-player-form">
+        <form>
+          <input type="text"/> 
+          <input type="submit" value="Add Player"/>
+        </form>
+      </div>
+    )
+  }
+})
+
 const Stats = function(props){
   let totalPlayers = props.players.length;
   let totalPoints = props.players.reduce(function(total, player){
@@ -136,6 +149,7 @@ const Application = React.createClass({
             );
           }.bind(this))}
         </div>
+        <AddPlayerForm />
       </div>
     );
   }

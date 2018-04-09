@@ -20,10 +20,10 @@ let PLAYERS = [
     score: 69
   }
 ]
-let nextId=5;
+let nextId = 5;
 
 const StopWatch = React.createClass({
-  getInitialState: function(){
+  getInitialState: function () {
     return {
       running: false,
       elapsedTime: 0,
@@ -31,42 +31,42 @@ const StopWatch = React.createClass({
     }
   },
 
-  componentDidMount: function(){
+  componentDidMount: function () {
     this.interval = setInterval(this.onTick, 100);
   },
-  componentWilUnmount: function(){
+  componentWilUnmount: function () {
     clearInterval(this.interval);
   },
-  onTick: function(){
-    if(this.state.running){
+  onTick: function () {
+    if (this.state.running) {
       let now = Date.now();
       this.setState({
         previousTime: now,
         elapsedTime: this.state.elapsedTime + (now - this.state.previousTime),
       });
     }
-    console.log('onTick', 100);
+    console.log('onTick');
   },
-  onStart: function(){
+  onStart: function () {
     this.setState({
-      running:true,
+      running: true,
       previousTime: Date.now(),
     });
   },
-  onStop: function(){
-    this.setState({running:false});
+  onStop: function () {
+    this.setState({ running: false });
   },
-  onReset: function(){
+  onReset: function () {
 
   },
-  render: function(){    
-    return(
+  render: function () {
+    return (
       <div className="stopwatch">
         <h2>Stopwatch</h2>
         <div className="stopwatch-time">0</div>
-        { this.state.running ? 
+        {this.state.running ?
           <button onClick={this.onStop}>Stop</button>
-          :  
+          :
           <button onClick={this.onStart}>Start</button>
         }
         <button onClick={this.onReset}>reset</button>
@@ -75,55 +75,55 @@ const StopWatch = React.createClass({
   }
 })
 const AddPlayerForm = React.createClass({
-  propTypes:{
+  propTypes: {
     onAdd: React.PropTypes.func.isRequired
   },
 
-  getInitialState: function(){
-    return{
+  getInitialState: function () {
+    return {
       name: "",
     }
   },
 
-  onNameChange: function(e){
+  onNameChange: function (e) {
     console.log("onNameChange", e.target.value);
-    this.setState({name: e.target.value})
+    this.setState({ name: e.target.value })
   },
 
-  onSubmit: function(e){
+  onSubmit: function (e) {
     e.preventDefault();
     this.props.onAdd(this.state.name);
-    this.setState({name: ""});
+    this.setState({ name: "" });
   },
 
-  render: function(){
+  render: function () {
     return (
       <div className="add-player-form">
         <form onSubmit={this.onSubmit}>
-          <input type="text" value={this.state.name} onChange={this.onNameChange}/> 
-          <input type="submit" value="Add Jabroni"/>
+          <input type="text" value={this.state.name} onChange={this.onNameChange} />
+          <input type="submit" value="Add Jabroni" />
         </form>
       </div>
     )
   }
 })
 
-const Stats = function(props){
+const Stats = function (props) {
   let totalPlayers = props.players.length;
-  let totalPoints = props.players.reduce(function(total, player){
+  let totalPoints = props.players.reduce(function (total, player) {
     return total + player.score;
   }, 0);
-  return(
+  return (
     <table className="stats">
       <tbody>
-          <tr>
-            <td>Players:</td>
-            <td>{totalPlayers}</td>
-          </tr>
-          <tr>
-            <td>Total Points:</td>
-            <td>{totalPoints}</td>
-          </tr>
+        <tr>
+          <td>Players:</td>
+          <td>{totalPlayers}</td>
+        </tr>
+        <tr>
+          <td>Total Points:</td>
+          <td>{totalPoints}</td>
+        </tr>
       </tbody>
     </table>
   )
@@ -137,7 +137,7 @@ Stats.PropTypes = {
 const Header = props => {
   return (
     <div className="header">
-      <Stats players={props.players}/>
+      <Stats players={props.players} />
       <h1>{props.title}</h1>
       <StopWatch />
     </div>
@@ -151,9 +151,9 @@ Header.propTypes = {
 const Counter = (props) => {
   return (
     <div className="counter">
-      <button className="counter-action decrement" onClick={function() {props.onChange(-1);}}>-</button>
+      <button className="counter-action decrement" onClick={function () { props.onChange(-1); }}>-</button>
       <div className="counter-score">{props.score}</div>
-      <button className="counter-action increment" onClick={function() {props.onChange(1);}}>+</button>
+      <button className="counter-action increment" onClick={function () { props.onChange(1); }}>+</button>
     </div>
   );
 }
@@ -206,12 +206,12 @@ const Application = React.createClass({
     }
   },
 
-  onScoreChange: function(index, delta){
-    this.state.players[index].score+= delta;
+  onScoreChange: function (index, delta) {
+    this.state.players[index].score += delta;
     this.setState(this.state);
   },
 
-  onPlayerAdd: function(name){
+  onPlayerAdd: function (name) {
     this.state.players.push({
       name: name,
       score: 0,
@@ -221,7 +221,7 @@ const Application = React.createClass({
     nextId += 1;
   },
 
-  onRemovePlayer: function(index){
+  onRemovePlayer: function (index) {
     this.state.players.splice(index, 1);
     this.setState(this.state);
   },
@@ -229,20 +229,20 @@ const Application = React.createClass({
   render: function () {
     return (
       <div className="scoreboard">
-        <Header title={this.props.title} players={this.state.players}/>
+        <Header title={this.props.title} players={this.state.players} />
         <div className="players">
           {this.state.players.map((player, index) => {
             return (
-              <Player 
-                onScoreChange={function(delta){this.onScoreChange(index,delta)}.bind(this)} 
-                onRemove={function(){this.onRemovePlayer(index)}.bind(this)}
-                name={player.name} 
-                score={player.score} 
+              <Player
+                onScoreChange={function (delta) { this.onScoreChange(index, delta) }.bind(this)}
+                onRemove={function () { this.onRemovePlayer(index) }.bind(this)}
+                name={player.name}
+                score={player.score}
                 key={player.id} />
             );
           }.bind(this))}
         </div>
-        <AddPlayerForm onAdd={this.onPlayerAdd}/>
+        <AddPlayerForm onAdd={this.onPlayerAdd} />
       </div>
     );
   }

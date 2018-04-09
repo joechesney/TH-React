@@ -57,7 +57,10 @@ const StopWatch = React.createClass({
     this.setState({ running: false });
   },
   onReset: function () {
-
+    this.setState({
+      elapsedTime: 0,
+      previousTime: Date.now(),
+    });
   },
   render: function () {
     let seconds = Math.floor(this.state.elapsedTime / 1000);

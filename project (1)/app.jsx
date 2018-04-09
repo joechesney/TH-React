@@ -13,25 +13,30 @@ let PLAYERS = [
     id: 3,
     name: "Regular Dudesney",
     score: 15
+  },
+  {
+    id: 4,
+    name: "Chups Narcsney",
+    score: 69
   }
 ]
 
 const Stats = function(props){
-let totalPlayers = props.players.length;
-
+  let totalPlayers = props.players.length;
+  let totalPoints = props.players.reduce(function(total, player){
+    return total + player.score;
+  }, 0);
   return(
     <table className="stats">
       <tbody>
-        <thead>
           <tr>
             <td>Players:</td>
             <td>{totalPlayers}</td>
           </tr>
           <tr>
             <td>Total Points:</td>
-            <td>123</td>
+            <td>{totalPoints}</td>
           </tr>
-        </thead>
       </tbody>
     </table>
   )
@@ -39,19 +44,20 @@ let totalPlayers = props.players.length;
 
 Stats.PropTypes = {
   players: React.PropTypes.array.isRequired,
-
+  // points: React.PropTypes.number.isRequired
 }
 
 const Header = props => {
   return (
     <div className="header">
-      <Stats />
+      <Stats players={props.players}/>
       <h1>{props.title}</h1>
     </div>
   );
 };
 Header.propTypes = {
-  title: React.PropTypes.string.isRequired
+  title: React.PropTypes.string.isRequired,
+  players: React.PropTypes.array.isRequired,
 };
 
 const Counter = (props) => {
@@ -118,7 +124,7 @@ const Application = React.createClass({
   render: function () {
     return (
       <div className="scoreboard">
-        <Header title={this.props.title} />
+        <Header title={this.props.title} players={this.state.players}/>
         <div className="players">
           {this.state.players.map((player, index) => {
             return (

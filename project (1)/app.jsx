@@ -20,7 +20,7 @@ let PLAYERS = [
     score: 69
   }
 ]
-
+let nextId=5;
 const AddPlayerForm = React.createClass({
   propTypes:{
     onAdd: React.PropTypes.func.isRequired
@@ -113,6 +113,7 @@ const Player = props => {
   return (
     <div className="player">
       <div className="player-name">
+        <a className="remove-player" onClick={props.onRemove} > X</a>
         {props.name}
       </div>
       <div className="player-score">
@@ -157,7 +158,13 @@ const Application = React.createClass({
 
 onPlayerAdd: function(name){
   console.log("player added", name);
-  
+  this.state.players.push({
+    name: name,
+    score: 0,
+    id: nextId,
+  });
+  this.setState(this.state);
+  nextId += 1;
 },
 
   render: function () {

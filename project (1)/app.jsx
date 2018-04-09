@@ -22,12 +22,20 @@ let PLAYERS = [
 ]
 
 const AddPlayerForm = React.createClass({
+  propTypes:{
+    onAdd: React.PropTypes.func.isRequired
+  },
+  onSubmit: function(e){
+    e.preventDefault();
+    // this.props.onAdd();
+  },
+
   render: function(){
     return (
       <div className="add-player-form">
-        <form>
+        <form onSubmit={this.onSubmit}>
           <input type="text"/> 
-          <input type="submit" value="Add Player"/>
+          <input type="submit" value="Add Jabroni"/>
         </form>
       </div>
     )
